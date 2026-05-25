@@ -1,0 +1,456 @@
+/* ===================== ROOT & VARIABLES ===================== */
+:root {
+    --color-bg: #0a0a0a;
+    --color-panel: #111827;
+    --color-accent: #ffffff;
+    --color-text: #e8d8b0;
+    --color-text-light: #cccccc;
+}
+
+/* ===================== LIGHT MODE ===================== */
+[data-theme="light"] {
+    --color-bg: #f8f5f0;
+    --color-panel: #ffffff;
+    --color-accent: #1a1a1a;
+    --color-text: #2c2c2c;
+    --color-text-light: #555555;
+}
+
+/* ===================== BASE & RESET ===================== */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background: var(--color-bg);
+    color: var(--color-text);
+    font-family: Georgia, serif;
+    line-height: 1.6;
+    transition: background-color 0.4s ease;
+}
+
+/* ===================== HEADER & NAVEGACIÓN ===================== */
+.main-header {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    background: transparent;
+    z-index: 1000;
+    padding: 1.8rem 0;
+    transition: all 0.4s ease;
+}
+
+.main-header.scrolled {
+    background: rgba(10, 10, 10, 0.95);
+    padding: 1.2rem 0;
+    backdrop-filter: blur(12px);
+    box-shadow: 0 4px 20px rgba(0,0,0,0.6);
+}
+
+[data-theme="light"] .main-header.scrolled {
+    background: rgba(248, 245, 240, 0.97);
+}
+
+.header-content {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 0 5%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+}
+
+.logo h1 {
+    font-size: 2.4rem;
+    letter-spacing: 6px;
+    color: var(--color-accent);
+    font-weight: normal;
+    text-align: center;
+    text-shadow: 0 2px 15px rgba(0,0,0,0.8);
+}
+
+/* Menú Desktop */
+.museum-nav {
+    display: flex;
+    gap: 2.4rem;
+    justify-content: center;
+}
+
+.museum-nav a {
+    font-family: 'Roboto', sans-serif;
+    font-weight: 400;
+    color: var(--color-text-light);
+    text-decoration: none;
+    font-size: 1.08rem;
+    transition: all 0.4s ease;
+    position: relative;
+}
+
+.museum-nav a:hover {
+    color: var(--color-accent);
+}
+
+.museum-nav a::after {
+    content: '';
+    position: absolute;
+    width: 0;
+    height: 2px;
+    bottom: -6px;
+    left: 0;
+    background: var(--color-accent);
+    transition: width 0.4s ease;
+}
+
+.museum-nav a:hover::after {
+    width: 100%;
+}
+
+/* Hamburguesa */
+.hamburger {
+    display: none;
+    flex-direction: column;
+    gap: 5px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    z-index: 1002;
+    padding: 10px;
+}
+
+.hamburger span {
+    display: block;
+    width: 32px;
+    height: 3px;
+    background: var(--color-accent);
+    transition: all 0.3s ease;
+}
+
+/* ===================== SWITCH DE TEMA ===================== */
+.theme-switch {
+    position: relative;
+    width: 62px;
+    height: 32px;
+}
+
+.theme-switch input {
+    opacity: 0;
+    width: 0;
+    height: 0;
+}
+
+.theme-switch label {
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: #333;
+    border-radius: 34px;
+    transition: 0.4s;
+}
+
+.theme-switch label:before {
+    position: absolute;
+    content: "";
+    height: 24px;
+    width: 24px;
+    left: 4px;
+    bottom: 4px;
+    background: #fff;
+    border-radius: 50%;
+    transition: 0.4s;
+}
+
+input:checked + label {
+    background: #1a1a1a;
+}
+
+input:checked + label:before {
+    transform: translateX(28px);
+}
+
+/* ===================== HERO SECTION ===================== */
+.hero-section {
+    height: 100vh;
+    position: relative;
+    overflow: hidden;
+}
+
+.hero-slide {
+    position: absolute;
+    top: 0; left: 0; width: 100%; height: 100%;
+    background-size: cover;
+    background-position: center;
+    opacity: 0;
+    transition: opacity 1.8s ease;
+    z-index: 1;
+}
+
+.hero-slide.active {
+    opacity: 1;
+}
+
+.hero-overlay {
+    position: absolute;
+    top: 0; left: 0; width: 100%; height: 100%;
+    background: linear-gradient(rgba(0,0,0,0.45), rgba(0,0,0,0.8));
+    z-index: 2;
+}
+
+.hero-content {
+    position: relative;
+    z-index: 3;
+    text-align: center;
+    max-width: 900px;
+    margin: 0 auto;
+    padding-top: 22rem;
+}
+
+.hero-content h2 {
+    font-size: 5.4rem;
+    color: var(--color-accent);
+    letter-spacing: 8px;
+    margin-bottom: 1.2rem;
+    text-shadow: 0 4px 30px rgba(0,0,0,0.9);
+}
+
+.lead {
+    font-size: 1.45rem;
+    color: var(--color-text-light);
+    margin-bottom: 3rem;
+}
+
+/* ===================== EXHIBIT / SALAS ===================== */
+.exhibit-section {
+    padding: 8rem 6%;
+    max-width: 1400px;
+    margin: 0 auto;
+}
+
+.exhibit-section h2 {
+    text-align: center;
+    font-size: 2.8rem;
+    color: var(--color-accent);
+    margin-bottom: 3rem;
+    letter-spacing: 3px;
+}
+
+.conclusion-content {
+    max-width: 800px;
+    margin: 0 auto;
+    text-align: center;
+    font-size: 1.3rem;
+    line-height: 1.8;
+}
+
+.conclusion-content p {
+    margin-bottom: 1.8rem;
+}
+
+.team {
+    font-style: italic;
+    color: var(--color-text-light);
+    margin-top: 2.5rem;
+}
+
+/* ===================== FOOTER - ESTILO ARTDEALERS ===================== */
+.main-footer {
+    background: #06101e;
+    color: #ffffff;
+    padding: 4rem 6% 0;
+    margin-top: 4rem;
+    border: none;
+}
+
+.footer-content {
+    max-width: 1400px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 4rem;
+    padding-bottom: 3rem;
+}
+
+.footer-column h3 {
+    font-size: 1.85rem;
+    letter-spacing: 5px;
+    margin: 0;
+    color: #ffffff;
+}
+
+.footer-column h4 {
+    font-size: 1.15rem;
+    margin-bottom: 1.4rem;
+    color: #ffffff;
+}
+
+.footer-column p,
+.footer-column a {
+    font-size: 0.98rem;
+    margin-bottom: 0.85rem;
+    color: #e0d9c8;
+    text-decoration: none;
+}
+
+.footer-column a:hover {
+    color: #ffffff;
+    text-decoration: underline;
+}
+
+.footer-bottom {
+    background: #000000;
+    color: #ffffff;
+    padding: 1.8rem 6%;
+    text-align: center;
+    font-size: 0.95rem;
+    width: 100vw;
+    margin-left: calc(50% - 50vw);
+    margin-right: calc(50% - 50vw);
+}
+
+/* ===================== HEADER + HERO TEXT VISIBILITY - VERSIÓN FINAL ===================== */
+
+/* Título grande y subtítulo del HERO (siempre blanco, porque la imagen es oscura) */
+.hero-content h2 {
+    color: #ffffff !important;
+}
+
+.lead {
+    color: #f0e6d0 !important;
+}
+
+/* ===================== HEADER EN PÁGINA PRINCIPAL ===================== */
+/* Página principal (con hero): header BLANCO mientras no se haga scroll */
+.hero-page .main-header:not(.scrolled) .logo h1,
+.hero-page .main-header:not(.scrolled) .museum-nav a,
+.main-header:not(.scrolled) .hero-section ~ .main-header .logo h1,
+.main-header:not(.scrolled) .hero-section ~ .main-header .museum-nav a {
+    color: #ffffff !important;
+}
+
+/* Hamburguesa blanca en página principal */
+.hero-page .main-header:not(.scrolled) .hamburger span,
+.main-header:not(.scrolled) .hero-section ~ .main-header .hamburger span {
+    background: #ffffff !important;
+}
+
+/* ===================== HEADER EN PÁGINAS SECUNDARIAS ===================== */
+/* Páginas secundarias (Sala 1, Conclusión, etc.): header oscuro desde el principio */
+.main-header:not(.scrolled) .logo h1,
+.main-header:not(.scrolled) .museum-nav a {
+    color: var(--color-accent) !important;
+}
+
+/* Hamburguesa oscura en modo claro en páginas secundarias */
+[data-theme="light"] .main-header:not(.scrolled) .hamburger span {
+    background: #1a1a1a !important;
+}
+
+/* Cuando ya se baja el scroll (todas las páginas) */
+.main-header.scrolled .logo h1,
+.main-header.scrolled .museum-nav a {
+    color: var(--color-accent) !important;
+}
+
+/* ===================== LOGO CLICKABLE - SIN LÍNEA DECORATIVA ===================== */
+.logo-link,
+.logo a {
+    text-decoration: none;
+    position: relative;
+}
+
+.logo-link::after,
+.logo a::after {
+    display: none !important;
+}
+
+/* Efecto hover opcional (solo cambia color, sin línea) */
+.logo-link:hover h1,
+.logo a:hover h1 {
+    color: var(--color-accent);
+    opacity: 0.9;
+}
+
+/* ===================== RESPONSIVE ===================== */
+@media (max-width: 768px) {
+    .logo h1 { font-size: 2rem; }
+    
+    /* Hero más adaptado a móviles */
+    .hero-content { 
+        padding-top: 14rem;           /* antes era 16rem - más espacio para móviles */
+    }
+    
+    .hero-content h2 { 
+        font-size: 3rem;              /* antes 3.6rem - más legible en pantallas pequeñas */
+        letter-spacing: 4px;
+    }
+
+    .lead {
+        font-size: 1.15rem;
+    }
+
+    .exhibit-section { padding: 6rem 5%; }
+
+    /* Menú hamburguesa móvil */
+    .hamburger { display: flex; }
+    
+    .museum-nav {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100vh;
+        background: #0a0a0a;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        gap: 2.8rem;
+        display: none;
+        z-index: 999;
+    }
+    
+    [data-theme="light"] .museum-nav {
+        background: #f8f5f0;
+    }
+    
+    .museum-nav.active { display: flex; }
+    
+    .museum-nav a {
+        font-size: 2.1rem;
+        font-weight: 300;
+        color: #ffffff;
+    }
+    
+    [data-theme="light"] .museum-nav a {
+        color: #1a1a1a;
+    }
+    
+    .hamburger.active span:nth-child(1) { transform: rotate(45deg) translate(8px, 8px); }
+    .hamburger.active span:nth-child(2) { opacity: 0; }
+    .hamburger.active span:nth-child(3) { transform: rotate(-45deg) translate(6px, -6px); }
+}
+
+/* ===================== LIGHT MODE - FOOTER ===================== */
+[data-theme="light"] .main-footer {
+    background: #e5e5e5;
+    color: #1a1a1a;
+}
+
+[data-theme="light"] .footer-column h3,
+[data-theme="light"] .footer-column h4 {
+    color: #1a1a1a;
+}
+
+[data-theme="light"] .footer-column p,
+[data-theme="light"] .footer-column a {
+    color: #333333;
+}
+
+[data-theme="light"] .footer-bottom {
+    background: #1a1a1a;
+    color: #e0e0e0;
+}
